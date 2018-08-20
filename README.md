@@ -37,16 +37,17 @@ Now, connect your ST-LINK to your blue pill. Connect the ST-LINK to your compute
 
 ![ST-LINK V2 to blue pill](st-link-v2-blue-pill.jpg)
 
-## Get Openocd
-
-You will need `.cfg` files to be able to launch `openocd` and you can find a bunch of `.cfg` for a lot of interfaces and targets here: [openocd](https://github.com/ntfreak/openocd).
-
-For this quick start, you can `git-clone` this repository and `cd` to `openocd` then launch the script:
+Launch openocd (the command may fail, go to "Trouble Shooting" for the potential solution):
 
 ```shell
-./path-to-blue-pill-quickstart/openocd.sh
+./openocd.sh
 ```
 
+Set the directories trusted for loading files not explicitly requested by user.
+```shell 
+echo "set auto-load safe-path /" >> ~/.gdbinit 
+```
+ 
 Open a new terminal, compile and flash
 
 ```shell
@@ -58,11 +59,13 @@ Now, the program is flashed, and you are on a gdb prompt. Type `c` (for continue
 
 ## Trouble Shooting
 
-The formerly mentionned st-link may not have the right pin mapping as showed on its shell. If `openocd` returns `unknown code 0x9`, just try using this pin mapping:
+The formerly mentionned st-link may not have the right pin mapping as showed on its shell. If `openocd` returns `unknown code 0x9`, please check the pin mapping by removing the shell and re-connect your st-link with the mapping shown on the PCB.
 
+If you're unable to remove the shell, try this pin mapping:
 
-| 1 | RST  | 2 | SWCLK |
+|pin|      |pin|       | 
 |---|------|---|-------|
+| 1 | RST  | 2 | SWCLK |
 | 3 | SWIM | 4 | SWDIO |
 | 5 | GND  | 6 | GND   |
 | 7 | 3.3V | 8 | 3.3V  |
