@@ -37,10 +37,14 @@ Now, connect your ST-LINK to your blue pill. Connect the ST-LINK to your compute
 
 ![ST-LINK V2 to blue pill](st-link-v2-blue-pill.jpg)
 
-Launch openocd:
+## Get Openocd
+
+You will need `.cfg` files to be able to launch `openocd` and you can find a bunch of `.cfg` for a lot of interfaces and targets here: [openocd](https://github.com/ntfreak/openocd).
+
+For this quick start, you can `git-clone` this repository and `cd` to `openocd` then launch the script:
 
 ```shell
-./openocd.sh
+./path-to-blue-pill-quickstart/openocd.sh
 ```
 
 Open a new terminal, compile and flash
@@ -51,6 +55,16 @@ cargo run
 ```
 
 Now, the program is flashed, and you are on a gdb prompt. Type `c` (for continue) you can see the on board LED blinking.
+
+## Trouble Shooting
+
+The formerly mentionned st-link may not have the right pin mapping as showed on its shell. If `openocd` returns `unknown code 0x9`, just try using this pin mapping:
+
+1 RST   2 SWCLK
+3 SWIM  4 SWDIO
+5 GND   6 GND
+7 3.3V  8 3.3V
+9 5.0V  10 5.0V
 
 ## Sources
 
