@@ -60,11 +60,14 @@ Now, the program is flashed, and you are on a gdb prompt. Type `c` (for continue
 
 The formerly mentionned st-link may not have the right pin mapping as showed on its shell. If `openocd` returns `unknown code 0x9`, just try using this pin mapping:
 
-1 RST   2 SWCLK
-3 SWIM  4 SWDIO
-5 GND   6 GND
-7 3.3V  8 3.3V
-9 5.0V  10 5.0V
+
+| 1 | RST  | 2 | SWCLK |
+|---|------|---|-------|
+| 3 | SWIM | 4 | SWDIO |
+| 5 | GND  | 6 | GND   |
+| 7 | 3.3V | 8 | 3.3V  |
+| 9 | 5.0V |10 | 5.0V  |
+
 
 ## Sources
 
