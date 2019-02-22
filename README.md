@@ -47,6 +47,14 @@ Launch openocd:
 ```shell
 openocd
 ```
+
+You should see terminal output like this:
+
+```
+Open On-Chip Debugger 0.10.0
+[...]
+Info : stm32f1x.cpu: hardware has 6 breakpoints, 4 watchpoints
+```
  
 Open a new terminal, compile and flash
 
@@ -104,6 +112,20 @@ reset halt
 stm32f1x unlock 0
 reset halt
 ```
+
+### MCU in low power state
+
+If the software which was already flashed to the Blue pill has put the processor core into a low power state, then this prevents the hardware debug interface from operating.  In this case, then OpenOCD will create output like this:
+
+```
+Error: jtag status contains invalid mode value - communication failure
+Polling target stm32f1x.cpu failed, trying to reexamine
+Examination failed, GDB will be halted. Polling again in 100ms
+Info : Previous state query failed, trying to reconnect
+```
+
+To workaround this, press the reset button on the blue pill board whilst starting openocd.  If the software that you've flashed to the STM32F103xx is putting it into the low power mode (e.g. by using the `wfi` instruction), then you might want to disable this (e.g. by busy-looping instead) when building the code in development mode instead of release mode.
+
 
 ## Sources
 
